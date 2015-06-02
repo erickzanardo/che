@@ -1,74 +1,70 @@
-var chars = [
- {k: 'Á', v: '&Aacute;'},
- {k: 'á', v: '&aacute;'},
- {k: 'Â', v: '&Acirc;'},
- {k: 'â', v: '&acirc;'},
- {k: 'À', v: '&Agrave;'},
- {k: 'à', v: '&agrave;'},
- {k: 'Å', v: '&Aring;'},
- {k: 'å', v: '&aring;'},
- {k: 'Ã', v: '&Atilde;'},
- {k: 'ã', v: '&atilde;'},
- {k: 'Ä', v: '&Auml;'},
- {k: 'ä', v: '&auml;'},
- {k: 'Æ', v: '&AElig;'},
- {k: 'æ', v: '&aelig;'},
+var entities = {
+ 'Á': '&Aacute;',
+ 'á': '&aacute;',
+ 'Â': '&Acirc;',
+ 'â': '&acirc;',
+ 'À': '&Agrave;',
+ 'à': '&agrave;',
+ 'Å': '&Aring;',
+ 'å': '&aring;',
+ 'Ã': '&Atilde;',
+ 'ã': '&atilde;',
+ 'Ä': '&Auml;',
+ 'ä': '&auml;',
+ 'Æ': '&AElig;',
+ 'æ': '&aelig;',
 
- {k: 'É', v: '&Eacute;'},
- {k: 'é', v: '&eacute;'},
- {k: 'Ê', v: '&Ecirc;'},
- {k: 'ê', v: '&ecirc;'},
- {k: 'È', v: '&Egrave;'},
- {k: 'è', v: '&egrave;'},
- {k: 'Ë', v: '&Euml;'},
- {k: 'ë', v: '&euml;'},
- {k: 'Ð', v: '&ETH;'},
- {k: 'ð', v: '&eth;'},
-  
- {k: 'Í', v: '&Iacute;'},
- {k: 'í', v: '&iacute;'},
- {k: 'Î', v: '&Icirc;'},
- {k: 'î', v: '&icirc;'},
- {k: 'Ì', v: '&Igrave;'},
- {k: 'ì', v: '&igrave;'},
- {k: 'Ï', v: '&Iuml;'},
- {k: 'ï', v: '&iuml;'},
+ 'É': '&Eacute;',
+ 'é': '&eacute;',
+ 'Ê': '&Ecirc;',
+ 'ê': '&ecirc;',
+ 'È': '&Egrave;',
+ 'è': '&egrave;',
+ 'Ë': '&Euml;',
+ 'ë': '&euml;',
+ 'Ð': '&ETH;',
+ 'ð': '&eth;',
 
- {k: 'Ó', v: '&Oacute;'},
- {k: 'ó', v: '&oacute;'},
- {k: 'Ô', v: '&Ocirc;'},
- {k: 'ô', v: '&ocirc;'},
- {k: 'Ò', v: '&Ograve;'},
- {k: 'ò', v: '&ograve;'},
- {k: 'Ø', v: '&Oslash;'},
- {k: 'ø', v: '&oslash;'},
- {k: 'Õ', v: '&Otilde;'},
- {k: 'õ', v: '&otilde;'},
- {k: 'Ö', v: '&Ouml;'},
- {k: 'ö', v: '&ouml;'},
-  
- {k: 'Ú', v: '&Uacute;'},
- {k: 'ú', v: '&uacute;'},
- {k: 'Û', v: '&Ucirc;'},
- {k: 'û', v: '&ucirc;'},
- {k: 'Ù', v: '&Ugrave;'},
- {k: 'ù', v: '&ugrave;'},
- {k: 'Ü', v: '&Uuml;'},
- {k: 'ü', v: '&uuml;'},
+ 'Í': '&Iacute;',
+ 'í': '&iacute;',
+ 'Î': '&Icirc;',
+ 'î': '&icirc;',
+ 'Ì': '&Igrave;',
+ 'ì': '&igrave;',
+ 'Ï': '&Iuml;',
+ 'ï': '&iuml;',
 
- {k: 'Ç', v: '&Ccedil;'},
- {k: 'ç', v: '&ccedil;'},
+ 'Ó': '&Oacute;',
+ 'ó': '&oacute;',
+ 'Ô': '&Ocirc;',
+ 'ô': '&ocirc;',
+ 'Ò': '&Ograve;',
+ 'ò': '&ograve;',
+ 'Ø': '&Oslash;',
+ 'ø': '&oslash;',
+ 'Õ': '&Otilde;',
+ 'õ': '&otilde;',
+ 'Ö': '&Ouml;',
+ 'ö': '&ouml;',
 
- {k: 'Ñ', v: '&Ntilde;'},
- {k: 'ñ', v: '&ntilde;'}
-];
+ 'Ú': '&Uacute;',
+ 'ú': '&uacute;',
+ 'Û': '&Ucirc;',
+ 'û': '&ucirc;',
+ 'Ù': '&Ugrave;',
+ 'ù': '&ugrave;',
+ 'Ü': '&Uuml;',
+ 'ü': '&uuml;',
+
+ 'Ç': '&Ccedil;',
+ 'ç': '&ccedil;',
+
+ 'Ñ': '&Ntilde;',
+ 'ñ': '&ntilde;'
+};
 
 module.exports = function(text) {
-  for(var i = 0; i < chars.length; i++) {
-    var c = chars[i];
-    while(text.indexOf(c.k) != -1) {
-      text = text.replace(c.k, c.v);
-    }
-  }
-  return text;
+  return text.split("").map(function(char) {
+    return entities[char] || char;
+  }).join("");
 }
